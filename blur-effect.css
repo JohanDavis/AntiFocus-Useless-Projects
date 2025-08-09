@@ -15,7 +15,14 @@ body.antifocus-blur-active {
 }
 
 #webgazerGazeDot {
-    opacity: 0 !important;
+    z-index: 999999 !important; /* Higher than overlay's 999998 */
+    opacity: 0 !important; /* Hidden by default */
+    transition: opacity 0.2s ease !important;
+}
+
+/* Show gaze dot when the switch is enabled */
+#webgazerGazeDot.visible {
+    opacity: 1 !important;
 }
 
 #webgazerVideoContainer {

@@ -38,6 +38,14 @@ chrome.runtime.onMessage.addListener((request) => {
             })
         );
     }
+
+    if (request.action === "toggleGazeDot") {
+        window.dispatchEvent(
+            new CustomEvent("toggleGazeDot", {
+                detail: { visible: request.visible },
+            })
+        );
+    }
 });
 
 // Functions ---------

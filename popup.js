@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.getElementById("toggleWebcamVisibility");
     const blurIntensityInput = document.getElementById("blurIntensity");
     const blurRadiusInput = document.getElementById("blurRadius");
+    const gazeDotSwitch = document.getElementById("gaze-dot-switch");
 
     // Existing webcam visibility toggle
     toggle.addEventListener("change", async () => {
@@ -40,6 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
         chrome.tabs.sendMessage(tab.id, {
             action: "updateBlurRadius",
             value: value,
+        });
+    });
+
+    gazeDotSwitch.addEventListener("change", async () => {
+        const isChecked = gazeDotSwitch.checked;
+        const [tab] = await chrome.tabs.query({
+            active: true,
+            currentWindow: true,
+        });
+        chrome.tabs.sendMessage(tab.id, {
+            action: "toggleGazeDot",
+            visible: isChecked,
         });
     });
 });

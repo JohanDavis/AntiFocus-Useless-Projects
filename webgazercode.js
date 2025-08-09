@@ -167,6 +167,72 @@ if (typeof window.webgazer !== "undefined") {
     console.error("WebGazer is not defined");
 }
 
+// Add this after your existing EyeTrackingBlurEffect class
+class GazeDotController {
+    constructor() {
+        this.isVisible = false;
+    }
+
+    setVisibility(visible) {
+        this.isVisible = visible;
+        this.updateDotVisibility();
+    }
+
+    updateDotVisibility() {
+        const gazeDot = document.getElementById("webgazerGazeDot");
+        if (gazeDot) {
+            if (this.isVisible) {
+                gazeDot.classList.add("visible");
+            } else {
+                gazeDot.classList.remove("visible");
+            }
+        }
+    }
+
+    // Call this method periodically to ensure the dot styling persists
+    ensureStyles() {
+        const gazeDot = document.getElementById("webgazerGazeDot");
+        if (gazeDot) {
+            gazeDot.style.zIndex = "999999";
+            this.updateDotVisibility();
+        }
+    }
+}
+
+// Create the gaze dot controller
+const gazeDotController = new GazeDotController();
+
+// Listen for gaze dot toggle events from content script
+window.addEventListener("toggleGazeDot", (event) => {
+    gazeDotController.setVisibility(event.detail.visible);
+});
+
+// Existing blur effect code...
+const eyeBlurEffect = new EyeTrackingBlurEffect();
+
+// Add this to your WebGazer initialization
+webgazer
+    .setGazeListener(function (data, timeStamp) {
+        if (data == null) return;
+        eyeBlurEffect.updateGazePosition(data.x, data.y);
+
+        // Ensure gaze dot styles are maintained
+        gazeDotController.ensureStyles();
+    })
+    .begin()
+    .then(() => {
+        console.log("WebGazer initialized successfully");
+        eyeBlurEffect.enable();
+
+        // Set up a periodic check to ensure dot styling
+        setInterval(() => {
+            gazeDotController.ensureStyles();
+        }, 1000);
+    })
+    .catch((error) => {
+        // Your existing error handling
+    });
+
 // Functions to be used in the terminal
 function AFpause() {
     if (typeof webgazer !== "undefined") {
