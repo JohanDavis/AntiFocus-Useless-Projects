@@ -1,0 +1,172 @@
+@font-face {
+    font-family: "Signika Negative SC";
+    src: url("fonts/SignikaNegativeSC-Light.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.my-container {
+    height: 28.751rem;
+    width: 18rem;
+    overflow: hidden;
+    background-image: url("images/ExportModel.jpg");
+    background-size: cover;
+}
+
+.neon-btn {
+    position: relative;
+    width: 3.7em;
+    height: 1.8em;
+}
+
+.my-slider {
+    position: relative;
+    top: 1.5rem;
+    left: 10.5rem;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: #22910d;
+    border-radius: 30%;
+    height: 0.16rem;
+    width: 4.4rem;
+}
+
+/* Add these styles for the range slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important; /* Override default appearance */
+    appearance: none !important;
+    width: 1rem !important;
+    height: 1rem !important;
+    border-radius: 50% !important;
+    background: #b2ffa4 !important;
+    border: 1px solid #cccccc !important;
+    cursor: pointer !important;
+    margin-top: -0.42rem !important;
+    box-shadow: none !important;
+}
+
+/* Add general input styling to reset any browser defaults */
+input[type="range"] {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+}
+
+/* For the toggle switches styles*/
+
+.switch {
+    --secondary-container: #22910d; /* Changed to requested green color */
+    --primary: #b2ffa4; /* Changed to requested light green color */
+    font-size: 0.6875rem;
+    position: relative;
+    display: inline-block;
+    width: 3.7em;
+    height: 1.8em;
+}
+
+.switch input {
+    display: none;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #313033;
+    transition: 0.2s;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 50%;
+    left: 0.2em;
+    bottom: 0.2em;
+    background-color: #aeaaae;
+    transition: 0.4s;
+}
+
+input:checked + .slider::before {
+    background-color: var(--primary);
+}
+
+input:checked + .slider {
+    background-color: var(--secondary-container);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--secondary-container);
+}
+
+input:checked + .slider:before {
+    transform: translateX(2.3em); /* Adjusted from 1.9em to 2.3em */
+}
+
+/* Style for the wider slider that has inline style width:5rem */
+.switch[style*="font-size: 1.2rem"] + .slider:before {
+    /* Adjust dimensions for the larger thumb */
+    height: 1.6em;
+    width: 1.6em;
+}
+
+/* Override transform for the larger slider */
+.switch[style*="font-size: 1.2rem"] input:checked + .slider:before {
+    transform: translateX(3.2em); /* Increased translation distance */
+}
+
+.slider-large:before {
+    height: 3rem;
+    width: 3rem;
+    top: -0.35rem;
+    left: -0.5rem;
+    /* transform: translateX(-1rem); */
+    transition: transform 0.4s;
+}
+
+/* input:checked + .slider-large:before { */
+/* Move to the target position during transition */
+/* transform: translateX(-1rem); */
+/* } */
+
+/* Toggle Switches styling ends*/
+
+.calibrate-btn {
+    background: #c00;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.4rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s;
+    position: absolute;
+    width: 6.5rem;
+    height: 1.8rem;
+    bottom: 3rem;
+    left: 4rem;
+}
+.calibrate-btn:hover {
+    background: #a00;
+}

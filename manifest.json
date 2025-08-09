@@ -1,0 +1,42 @@
+{
+    "manifest_version": 3,
+    "name": "AntiFocus - Eye Tracking Website Blur",
+    "version": "1.0.0",
+    "author": "Johan Antony Davis",
+    "description": "A Chrome extension that uses your camera to track your eye movements and dynamically blurs the areas of a webpage you're looking at.",
+
+    "icons": {
+        "16": "images/icon.png",
+        "32": "images/icon.png",
+        "48": "images/icon.png",
+        "128": "images/icon.png"
+    },
+
+    "action": {
+        "default_icon": {
+            "16": "images/icon.png",
+            "32": "images/icon.png",
+            "48": "images/icon.png"
+        },
+        "default_title": "AntiFocus",
+        "default_popup": "popup.html"
+    },
+
+    "permissions": ["scripting", "activeTab", "storage"],
+
+    "host_permissions": ["<all_urls>"],
+
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"],
+            "css": ["blur-effect.css"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["webgazer.js", "webgazerCode.js"],
+            "matches": ["<all_urls>"]
+        }
+    ]
+}

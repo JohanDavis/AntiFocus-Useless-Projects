@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AntiFocus</title>
+        <link rel="stylesheet" href="popup.css" />
+    </head>
+    <body>
+        <div class="my-container">
+            <div class="options">
+                <!-- Neon Button 1 -->
+                <div
+                    class="neon-btn"
+                    style="
+                        position: fixed;
+                        top: 8rem;
+                        left: 50%;
+                        transform: translate(-90%, 0);
+                    "
+                >
+                    <label class="switch" style="font-size: 1.2rem">
+                        <input type="checkbox" checked />
+                        <span
+                            class="slider slider-large"
+                            style="width: 6rem"
+                        ></span>
+                    </label>
+                </div>
+
+                <!-- Neon Button 2 -->
+                <div class="neon-btn" style="top: 14.95rem; left: 13.1875rem">
+                    <label class="switch">
+                        <input type="checkbox" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Neon Button 3 -->
+                <div class="neon-btn" style="top: 15.35rem; left: 13.1875rem">
+                    <label class="switch">
+                        <input type="checkbox" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Neon Button 4 -->
+                <div class="neon-btn" style="top: 15.77rem; left: 13.1875rem">
+                    <label class="switch">
+                        <input type="checkbox" checked />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Slider 1 -->
+                <div class="my-slider" style="top: 16.08rem; left: 11.3rem">
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                        id="blurIntensity"
+                        style="width: 4.4rem; height: 0.16rem"
+                    />
+                </div>
+
+                <!-- Slider 2 -->
+                <div class="my-slider" style="top: 16.85rem; left: 11.3rem">
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                        id="blurRadius"
+                        style="width: 4.4rem; height: 0.16rem"
+                    />
+                </div>
+
+                <!-- Rectangular button -->
+                <div
+                    style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 1.2rem;
+                    "
+                >
+                    <button class="calibrate-btn">
+                        <img
+                            src="images/sparkle.png"
+                            alt=""
+                            style="
+                                height: 1rem;
+                                width: auto;
+                                margin-left: 0.65rem;
+                                margin-right: 0.5rem;
+                            "
+                        />
+                        <span
+                            style="
+                                font-size: 0.7rem;
+                                font-family: 'Signika Negative SC', sans-serif;
+                            "
+                            >Calibrate</span
+                        >
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
