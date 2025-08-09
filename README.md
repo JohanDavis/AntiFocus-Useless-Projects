@@ -46,45 +46,22 @@ For Software:
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/19ad46ac-c4ee-4264-80cc-c09bb20a1769" />
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+*Showing the extension in the chrome extensions folder*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/dfd2b86b-8a40-45e6-bc83-53d78a0a9d7f" />
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+*The window is blurred where the user is looking*
 
-For Hardware:
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/fcd881d4-902c-4657-8508-b44aca8f491c" />
 
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
+*Multiple settings allowed too, here the camera is not visible on the screen and the gaze dot is enabled (where the user is looking)*
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
-
-# Additional Demos
-[Add any extra demo materials/links]
+(https://drive.google.com/file/d/1WnnrveVxBrR_YszpJv6XNJgN_B0W2KpX/view?usp=sharing)
+The video demontrates that the AI tracks our eyes around the screen and blurs the content that the eyes are looking at. The extensions also has many customization options like camera toggle on/off, enable gaze dot to show where the AI thinks you are looking at, etc.
 
 ## Team Contributions
 - Johan Antony Davis: Whole
