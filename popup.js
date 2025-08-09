@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const blurIntensityInput = document.getElementById("blurIntensity");
     const blurRadiusInput = document.getElementById("blurRadius");
     const gazeDotSwitch = document.getElementById("gaze-dot-switch");
+    const caliBtn = document.querySelector(".calibrate-btn");
 
     // Existing webcam visibility toggle
     toggle.addEventListener("change", async () => {
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // New blur intensity control
     blurIntensityInput.addEventListener("input", async () => {
         const value = parseInt(blurIntensityInput.value);
+        document.getElementById("blurIntensityValue").textContent = value;
         const [tab] = await chrome.tabs.query({
             active: true,
             currentWindow: true,
@@ -34,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // New blur radius control
     blurRadiusInput.addEventListener("input", async () => {
         const value = parseInt(blurRadiusInput.value);
+        document.getElementById("blurRadiusValue").textContent = value;
         const [tab] = await chrome.tabs.query({
             active: true,
             currentWindow: true,
@@ -55,17 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
             visible: isChecked,
         });
     });
-});
 
-// Add this to popup.js for live value display
-blurIntensityInput.addEventListener("input", async () => {
-    const value = parseInt(blurIntensityInput.value);
-    document.getElementById("blurIntensityValue").textContent = value;
-    // ... rest of existing code
-});
-
-blurRadiusInput.addEventListener("input", async () => {
-    const value = parseInt(blurRadiusInput.value);
-    document.getElementById("blurRadiusValue").textContent = value;
-    // ... rest of existing code
+    caliBtn.addEventListener("click", () => {
+        alert(
+            "Click on the midpoint and each of the corners of the webpage 5 times each while looking at the mouse pointer to calibrate the eye tracker. Try not to move your head, only your eyes."
+        );
+    });
 });
