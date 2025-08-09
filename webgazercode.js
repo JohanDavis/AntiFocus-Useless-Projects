@@ -2,9 +2,9 @@ if (typeof window.webgazer !== "undefined") {
     console.log("Welcome to AntiFocus");
     console.log("AntiFocus functions: AFpause(), AFresume(), AFend()");
 
-    // Adjust these to adjust the blur
-    const MAX_BLUR_DISTANCE = 80;
-    const MAX_BLUR_AMOUNT = 20;
+    // Adjust these to adjust the blur (now dynamic)
+    let MAX_BLUR_AMOUNT = 20;
+    let BLUR_DISTANCE = 40;
 
     // Eye tracking blur effect class
     class EyeTrackingBlurEffect {
@@ -29,9 +29,14 @@ if (typeof window.webgazer !== "undefined") {
 
         createBlurOverlay() {
             this.removeBlurOverlay();
-
             this.blurOverlay = document.createElement("div");
             this.blurOverlay.id = "antifocus-blur-overlay";
+            this.updateBlurOverlayStyle();
+            document.body.appendChild(this.blurOverlay);
+        }
+
+        updateBlurOverlayStyle() {
+            if (!this.blurOverlay) return;
             this.blurOverlay.style.cssText = `
                 position: fixed !important;
                 top: 0 !important;
@@ -45,8 +50,6 @@ if (typeof window.webgazer !== "undefined") {
                 opacity: 0 !important;
                 transition: opacity 0.1s ease !important;
             `;
-
-            document.body.appendChild(this.blurOverlay);
         }
 
         removeBlurOverlay() {
@@ -58,7 +61,6 @@ if (typeof window.webgazer !== "undefined") {
 
         updateGazePosition(x, y) {
             if (!this.isActive || !this.blurOverlay) return;
-
             this.eyeX = (x / window.innerWidth) * 100;
             this.eyeY = (y / window.innerHeight) * 100;
             this.updateBlurMask();
@@ -66,19 +68,40 @@ if (typeof window.webgazer !== "undefined") {
 
         updateBlurMask() {
             if (!this.blurOverlay) return;
-
-            const maskImage = `radial-gradient(circle at ${this.eyeX}% ${this.eyeY}%, black 0%, black 15%, transparent 40%)`;
-
+            const maskImage = `radial-gradient(circle at ${this.eyeX}% ${this.eyeY}%, black 0%, black 15%, transparent ${BLUR_DISTANCE}%)`;
             this.blurOverlay.style.maskImage = maskImage;
             this.blurOverlay.style.webkitMaskImage = maskImage;
             this.blurOverlay.style.opacity = "1";
+        }
+
+        // New method to update blur intensity
+        updateBlurIntensity(newIntensity) {
+            MAX_BLUR_AMOUNT = newIntensity;
+            this.updateBlurOverlayStyle();
+            console.log(`Blur intensity updated to: ${MAX_BLUR_AMOUNT}px`);
+        }
+
+        // New method to update blur radius
+        updateBlurRadius(newRadius) {
+            BLUR_DISTANCE = newRadius;
+            this.updateBlurMask(); // Refresh the mask with new radius
+            console.log(`Blur radius updated to: ${BLUR_DISTANCE}%`);
         }
     }
 
     // Create the blurring overlay
     const eyeBlurEffect = new EyeTrackingBlurEffect();
 
-    // Check for some errors before initializing WebGazer
+    // Listen for blur control events from content script
+    window.addEventListener("updateBlurIntensity", (event) => {
+        eyeBlurEffect.updateBlurIntensity(event.detail.value);
+    });
+
+    window.addEventListener("updateBlurRadius", (event) => {
+        eyeBlurEffect.updateBlurRadius(event.detail.value);
+    });
+
+    // Rest of your existing WebGazer initialization code...
     if (
         !window.isSecureContext &&
         location.protocol !== "https:" &&
@@ -97,29 +120,22 @@ if (typeof window.webgazer !== "undefined") {
             "Camera access is not available. Please ensure you're using a modern browser with camera support."
         );
     } else {
-        // No errors found
         window.saveDataAcrossSessions = true;
-
         console.log("Initializing WebGazer...");
 
         try {
             webgazer
                 .setGazeListener(function (data, timeStamp) {
                     if (data == null) return;
-
-                    // Update blur effect based on eye position
                     eyeBlurEffect.updateGazePosition(data.x, data.y);
                 })
                 .begin()
                 .then(() => {
                     console.log("WebGazer initialized successfully");
-                    // Enable blur effect once WebGazer is loaded
                     eyeBlurEffect.enable();
                 })
                 .catch((error) => {
                     console.error("Failed to initialize WebGazer:", error);
-
-                    // Provide specific guidance based on common issues
                     let errorMsg = "Failed to access camera. ";
                     if (error.message && error.message.includes("Permission")) {
                         errorMsg +=
@@ -140,7 +156,6 @@ if (typeof window.webgazer !== "undefined") {
                         errorMsg +=
                             "Please check your camera settings and try again.";
                     }
-
                     alert(errorMsg);
                 });
         } catch (error) {
@@ -152,9 +167,7 @@ if (typeof window.webgazer !== "undefined") {
     console.error("WebGazer is not defined");
 }
 
-// Functions
-
-// Functions to be used in the terminal---------
+// Functions to be used in the terminal
 function AFpause() {
     if (typeof webgazer !== "undefined") {
         webgazer.pause();
