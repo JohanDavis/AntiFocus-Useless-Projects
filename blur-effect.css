@@ -17,3 +17,11 @@ body.antifocus-blur-active {
 #webgazerGazeDot {
     opacity: 0 !important;
 }
+
+#webgazerVideoContainer {
+    display: none;
+}
+
+#webgazerVideoContainer.visible {
+    display: block !important;
+}

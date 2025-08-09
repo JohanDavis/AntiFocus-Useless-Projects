@@ -9,6 +9,18 @@ if (
     addWebgazerScriptTag();
 }
 
+chrome.runtime.onMessage.addListener((request) => {
+    if (request.action === "toggleVideoContainer") {
+        const container = document.getElementById("webgazerVideoContainer");
+        if (!container) return;
+        if (request.visible) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+});
+
 // Functions ---------
 
 function addWebgazerScriptTag() {
@@ -31,7 +43,7 @@ function addWebgazerScriptTag() {
 
 function addWebgazerCodeScriptTag() {
     const script = document.createElement("script");
-    script.src = chrome.runtime.getURL("webgazerCode.js");
+    script.src = chrome.runtime.getURL("webgazercode.js");
     script.type = "text/javascript";
     // script.defer = true;
 

@@ -35,7 +35,7 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": ["webgazer.js", "webgazerCode.js"],
+            "resources": ["webgazer.js", "webgazercode.js"],
             "matches": ["<all_urls>"]
         }
     ]
